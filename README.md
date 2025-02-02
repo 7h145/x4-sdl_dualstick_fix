@@ -1,8 +1,6 @@
 # X4 broken "duplicate identical joystick" SDL hack
 
-The linux native version of [egosoft X4](https://www.egosoft.com/games/x4/info_en.php) can't cope with two identical joysticks due to a bug in the joystick enumeration in X4.
-
-This rather old bug is still present in X4 7.50 beta (551247), [I've filed a fresh bug report](https://forum.egosoft.com/viewtopic.php?t=469177).
+The linux native version of [egosoft X4](https://www.egosoft.com/games/x4/info_en.php) can't cope with two identical joysticks due to a bug in the joystick enumeration in X4.  This rather old bug is still present in X4 7.50 beta (551247), [I've filed a fresh bug report](https://forum.egosoft.com/viewtopic.php?t=469177).
 
 In the meantime, I'd really like to use my expensive toys... 
 
@@ -10,20 +8,20 @@ A long time ago, [Jasem Mutlaq came up with a patch for libSDL2](https://github.
 
 This is just Jasem Mutlaqs patch rebased to libSDL 2.30.11 and packaged in a convenient container for building.
 
-## Build the patched libSDL
+## Building the patched libSDL
 
 The `Containerfile` builds the whole shebang at container build time, so just...
 
     podman build -t x4sdlfix:latest .
 
-to build image with a fresh `libSDL2*.so*` shared library in the `/stage` directory.  After that something to the effect of
+to build image with a fresh `libSDL2*.so*` shared library in the `/stage` directory in the conatiner.  After that something to the effect of
 
     podman run -v ${PWD}:/tmp -it --rm x4sdlfix bash -c 'cp -v /stage/libSDL2* /tmp'
 
 to get the newly build patched `libSDL2*.so*` library into `$PWD`.  You may delete the `x4sdlfix` container image afterwards of course (e.g. `podman image rm x4sdlfix:latest`).
 
 
-## Install
+## Installing the patched libSDL
 
 Just replace the `libSDL2-2.0.so.0` in `X4 Foundations/lib` with the patched `libSDL2*.so*`, e.g.
 
