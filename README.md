@@ -4,7 +4,7 @@ The linux native version of [egosoft X4](https://www.egosoft.com/games/x4/info_e
 
 In the meantime, I'd really like to use my expensive toys... 
 
-A long time ago, [Jasem Mutlaq files an X4 bug report](https://forum.egosoft.com/viewtopic.php?p=4954066#p4954066) and crucially [came up with a patch for libSDL2](https://github.com/libsdl-org/SDL/issues/3686) to mitigate the problem on the libSDL side (which did not make it into libSDL proper since it's kind of a crude hack to workaround a bug in X4).  All kudos to him, thanks Jasem!
+A long time ago, [Jasem Mutlaq filed an X4 bug report](https://forum.egosoft.com/viewtopic.php?p=4954066#p4954066) and crucially [came up with a patch for libSDL2](https://github.com/libsdl-org/SDL/issues/3686) to mitigate the problem on the libSDL side (which did not make it into libSDL proper since it's kind of a crude hack to workaround a bug in X4).  All kudos to him, thanks Jasem!
 
 This is just Jasem Mutlaqs patch rebased to libSDL 2.30.11 and packaged in a convenient container for building.
 
@@ -33,6 +33,9 @@ Just replace the `libSDL2-2.0.so.0` in `X4 Foundations/lib` with the patched `li
 Or something nicer with popper named symlinks if you fancy.
 
 ## Remarks
+
+ * The [build artifact produced by the process described above is in the
+   repository](https://github.com/7h145/x4-sdl_dualstick_fix/blob/main/libSDL2-2.0.so.0.3000.11.xz).  This is [`xz` compressed](https://en.wikipedia.org/wiki/XZ_Utils), you need to `unxz` obviously.
 
  * As said above, this is a hack in libSDL to workaround a bug in X4.  I really wouldn't use this in any other context.
 
