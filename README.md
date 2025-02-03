@@ -4,9 +4,9 @@ The linux native version of [egosoft X4](https://www.egosoft.com/games/x4/info_e
 
 In the meantime, I'd really like to use my expensive toys... 
 
-A long time ago, [Jasem Mutlaq filed an X4 bug report](https://forum.egosoft.com/viewtopic.php?p=4954066#p4954066) and crucially [came up with a patch for libSDL2](https://github.com/libsdl-org/SDL/issues/3686) to mitigate the problem on the libSDL side (which did not make it into libSDL proper since it's kind of a crude hack to workaround a bug in X4).  All kudos to him, thanks Jasem!
+A long time ago, [Jasem Mutlaq filed an X4 bug report](https://forum.egosoft.com/viewtopic.php?p=4954066#p4954066) and crucially [came up with a patch for libSDL](https://github.com/libsdl-org/SDL/issues/3686) to mitigate the problem on the libSDL side (which did not make it into libSDL proper since it's kind of a crude hack to workaround a bug in X4).  All kudos to him, thanks Jasem!
 
-This is just Jasem Mutlaqs patch rebased to libSDL 2.30.11 and packaged in a convenient container for building.
+This is just Jasem Mutlaqs patch from 2020 rebased to libSDL 2.30.11 and packaged in a convenient container for building.
 
 ## Building the patched libSDL
 
@@ -39,9 +39,7 @@ Or something nicer with popper named symlinks if you fancy.
 
  * As said above, this is a hack in libSDL to workaround a bug in X4.  I really wouldn't use this in any other context.
 
- * I don't know wich version of libSDL is used by egosoft to build the current X4 version; Jasem bug report is from 2020, maybe against libSDL 2.0.12.
+ * I neither know the exact version of libSDL shipped by egosoft nor if they applied patches to their libSDL, hence this (near pristine) libSDL 2.30.11 introduces some new SDL quirks to X4.
 
-   The contemporary versions of libSDL (like 2.30.11) do introduce a set of interesting new SDL quirks to X4, replacing the original ones from the egosoft version.  I like the new quirks more than the old ones, but your mileage may vary.
-
- * I do set [`SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0`](https://wiki.libsdl.org/SDL2/SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS), which mimics the behaviour of egosofts libSDL (i.e. `SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0 %command%` in the Steam launch options).  This should actually be the default in libSDL, but it is obviously not.
+   One notable new quirk is a change in loss of focus behaviour; set [`SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0`](https://wiki.libsdl.org/SDL2/SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS) in order to mimic egosoft libSDL regarding loss of focus (i.e. `SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0 %command%` in the Steam launch  options).  This *should* actually be the libSDL default, but it's obviously not.
 
