@@ -36,11 +36,9 @@ Or something nicer with popper named symlinks if you fancy.
 
  * As said above, this is a hack in libSDL to workaround a bug in X4.  I really wouldn't use this in any other context.
 
- * I don't know wich version of libSDL is used by egosoft to build the current X4 version; Jasem bug report was in 2020, maybe against libSDL 2.0.12.
+ * I don't know wich version of libSDL is used by egosoft to build the current X4 version; Jasem bug report is from 2020, maybe against libSDL 2.0.12.
 
    The contemporary versions of libSDL (like 2.30.11) do introduce a set of interesting new SDL quirks to X4, replacing the original ones from the egosoft version.  I like the new quirks more than the old ones, but your mileage may vary.
 
- * I do set [`SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0`](https://wiki.libsdl.org/SDL2/SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS), which mimics the behaviour of egosofts libSDL.  This should be the default in libSDL, but is is obviously not.
-
-    SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0 %command%
+ * I do set [`SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0`](https://wiki.libsdl.org/SDL2/SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS), which mimics the behaviour of egosofts libSDL (i.e. `SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0 %command%` in the Steam launch options).  This should actually be the default in libSDL, but it is obviously not.
 
