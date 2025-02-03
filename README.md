@@ -4,7 +4,7 @@ The linux native version of [egosoft X4](https://www.egosoft.com/games/x4/info_e
 
 In the meantime, I'd really like to use my expensive toys... 
 
-A long time ago, [Jasem Mutlaq came up with a patch for libSDL2](https://github.com/libsdl-org/SDL/issues/3686) to mitigate the problem on the libSDL side (which did not make it into libSDL proper since it's kind of a crude hack to workaround a bug in X4).  All kudos to him, thanks Jasem!
+A long time ago, [Jasem Mutlaq files an X4 bug report](https://forum.egosoft.com/viewtopic.php?p=4954066#p4954066) and crucially [came up with a patch for libSDL2](https://github.com/libsdl-org/SDL/issues/3686) to mitigate the problem on the libSDL side (which did not make it into libSDL proper since it's kind of a crude hack to workaround a bug in X4).  All kudos to him, thanks Jasem!
 
 This is just Jasem Mutlaqs patch rebased to libSDL 2.30.11 and packaged in a convenient container for building.
 
@@ -14,7 +14,7 @@ The `Containerfile` builds the whole shebang at container build time, so just...
 
     podman build -t x4sdlfix:latest .
 
-to build image with a fresh `libSDL2*.so*` shared library in the `/stage` directory in the conatiner.  After that something to the effect of
+to build image with a fresh `libSDL2*.so*` shared library in the `/stage` directory in the container.  After that something to the effect of
 
     podman run -v ${PWD}:/tmp -it --rm x4sdlfix bash -c 'cp -v /stage/libSDL2* /tmp'
 
@@ -39,4 +39,8 @@ Or something nicer with popper named symlinks if you fancy.
  * I don't know wich version of libSDL is used by egosoft to build the current X4 version; Jasem bug report was in 2020, maybe against libSDL 2.0.12.
 
    The contemporary versions of libSDL (like 2.30.11) do introduce a set of interesting new SDL quirks to X4, replacing the original ones from the egosoft version.  I like the new quirks more than the old ones, but your mileage may vary.
+
+ * I do set [`SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0`](https://wiki.libsdl.org/SDL2/SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS), which mimics the behaviour of egosofts libSDL.  This should be the default in libSDL, but is is obviously not.
+
+    SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0 %command%
 
