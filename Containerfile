@@ -16,14 +16,14 @@ RUN true \
   && apt-get -y remove --purge --auto-remove && apt-get -y clean \
   && rm -rf /var/lib/apt/lists/*
 
+ARG LIBSDL_TAG="release-2.30.11"
+ENV LIBSDL_TAG=$LIBSDL_TAG
+
 RUN true \
   && mkdir -vp /stage \
   && mkdir -vp /stage/build
 
-COPY skel/x4_duplicate_joystick_hack.patch /stage
-
-ARG LIBSDL_TAG="release-2.30.11"
-ENV LIBSDL_TAG=$LIBSDL_TAG
+COPY x4_duplicate_joystick_hack.patch /stage
 
 RUN true \
   && cd /stage \
